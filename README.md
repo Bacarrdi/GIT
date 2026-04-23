@@ -257,3 +257,49 @@ Como regla general, trata de que el mensaje principal no sea demasiado largo.
 Si necesitas explicar muchas cosas, probablemente ese commit contiene varios cambios y conviene dividirlo.
 
 Un mensaje corto y claro hace que el historial sea más fácil de leer.
+#### Usa prefijos para que el historial sea más ordenado
+
+En muchos proyectos se usan prefijos al inicio del mensaje para indicar el tipo de cambio realizado.
+
+Algunos de los más comunes son:
+
+- `feat:` agrega una nueva funcionalidad
+- `fix:` corrige un error
+- `docs:` modifica documentación
+- `style:` cambia formato o estilos sin tocar la lógica
+- `refactor:` reorganiza código sin cambiar su comportamiento
+- `test:` agrega o modifica pruebas
+- `build:` cambia procesos de instalación o compilación
+- `ci:` modifica integración continua
+- `perf:` mejora el rendimiento
+
+Ejemplos:
+```bash
+git commit -m "feat: add search filter"
+```
+Guarda una nueva característica.
+```bash
+git commit -m "fix: correct button position"
+```
+Registra la corrección de un error.
+```bash
+git commit -m "docs: improve README structure"
+```
+Guarda cambios relacionados con la documentación.
+
+#### Agrega más contexto cuando sea necesario
+
+A veces el título del commit no es suficiente para explicar bien el cambio.
+En ese caso, puedes escribir un commit con título y descripción más detallada.
+```bash
+git commit
+```
+Abre el editor para escribir el título y el cuerpo del commit.
+
+Ejemplo:
+```bash
+feat: add profile edit option
+
+Se añadió la opción para editar el perfil del usuario.
+También se validan campos vacíos antes de guardar los cambios.
+```
