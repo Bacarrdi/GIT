@@ -132,3 +132,14 @@ Cada día se enviará un form en cualquier hora de la clase, disponible de 5 a 1
 
 #### Aprobación
 Puntaje mínimo 65 pts sobre 100 en total.
+
+## STATES Y COMMITS (Clase 2 - 21 de abril, 2026)
+### Los estados de GIT
+1. *Directorio de Trabajo (Modificado)*: Tu carpeta local. Estás escribiendo código, pero Git aún no lo tiene "asegurado". Esto es después del git init. Git ve lo que estamos haciendo.
+2. *Stage Area (Preparado)*: El área de espera. Le dices a Git: "Esto es lo que quiero guardar".
+3. *Repositorio Local (Confirmado)*: El historial. Tus cambios ya tienen un ID (hash) y son parte de la historia. Pasan a un punto de guardado, en el historial o logs.
+
+*Diagrama de cómo funcionan los estados de GIT:*
+
+![flujo de como funciona Git](images/diagrama.png)
+
