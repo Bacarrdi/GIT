@@ -303,3 +303,124 @@ feat: add profile edit option
 Se añadió la opción para editar el perfil del usuario.
 También se validan campos vacíos antes de guardar los cambios.
 ```
+
+## GITHUB (Clase 3 - 22 de abril, 2026)
+### ¿Qué es GitHub?
+Es una plataforma en línea para almacenar, compartir y colaborar en código de software. Es como una red social para programadores, combinada con un servicio de almacenamiento en la nube y herramientas de control de versiones.
+
+### Diferencia entre GIT y GitHub
+En pocas palabras:
++ *Git* es la herramienta (motor)
++ *GitHub* es el sitio web (plataforma)
+
+*Git* es como Microsoft Word instalado en tu laptop. Con Word podemos escribir, guardar cambios, ver versiones anteriores, corregir errores, etc. Todo sin internet. 
+
+*GitHub* es como Google Docs (pero solo para código). Es un sitio web donde podemos escribir nuestro documento de Word (nuestro repositorio de Git) para que otros lo puedan ver, comentar, sugerir cambios, o incluso hagan una copia y escriban su propio capítulo. Además, Google Docs guarda nuestro documento en la nube por si se daña nuestra laptop o computadora.
+
+### ¿Cómo crear una cuenta en GitHub?
+1. Ir a https://github.com/
+2. Sign up for GitHub
+3. Continuar con Google y seleccionar una cuenta o ingresar un correo válido (no institucional - recomendado) 
+4. Colocar un username (nombre)
+5. Escoger el pais/región
+6. Oprimir el botón de "Crear cuenta"
+
+### Conectar nuestro repositorio con GitHub
+Antes que nada debemos configurar el SSH de nuestra maquina para que se conecte con GitHub. 
+
+*¿Por qué no HTTP/HTTPS?*
+
+Porque *SSH es más seguro* (usa claves criptográficas) y *más cómodo* (no te pide usuario/contraseña ni token en cada push o pull). Con *HTTPS* tendríamos que autenticarnos constantemente; con SSH lo hacemos una sola vez.
+
+*Configuración del SSH*
+1. Desde Linux: Abrimos la terminal
+   Desde Windows: Abrimos Git Bash
+2. Ingresamos el siguiente comando:
+   ```bash
+   ssh-keygen -t ed25519 -C "nombre@correo.com"
+   ```
+   (El correo debe ser el mismo con el que creamos la cuenta de GitHub)
+   
+   Este es el comando que genera un par de claves SSH (pública y privada) usando el algoritmo Ed25519, donde -t especifica el tipo de cifrado y -C agrega una etiqueta (generalmente el correo de GitHub) para identificar quién creó la clave.
+3. Damos Enter para aceptar la ubicación por defecto (~/.ssh/id_ed25519)
+4. Mostramos la *clave pública* y la copiamos:
+   ```bash
+   cat ~/.ssh/id_ed25519.pub
+   ```
+   Comandos alternativos según dónde guardaste la clave 
+   | Situación | Comando | Nota |
+   | :--- | :--- | :--- |
+   | **Ubicación por defecto** | `cat ~/.ssh/id_ed25519.pub` | Muestra la clave en pantalla para copiarla manualmente |
+   | **Ubicación personalizada** | `cat /ruta/donde/guardaste/la/clave.pub` | Reemplaza "ruta" por la que elegiste al ejecutar `ssh-keygen` |
+   | **Copiar directamente al portapapeles (Linux)** | `xclip -sel clip < ~/.ssh/id_ed25519.pub` | Necesitas tener `xclip` instalado |
+   | **Copiar directamente al portapapeles (Windows Git Bash)** | `clip < ~/.ssh/id_ed25519.pub` | Te ahorra seleccionar y copiar manualmente |
+   | **Copiar directamente al portapapeles (Mac)** | `pbcopy < ~/.ssh/id_ed25519.pub` | Comando nativo de macOS |
+5. Dentro de GitHub ir a Configuración y Claves SSH y GPG.
+6. Click en "Nueva clave SSH".
+7. Añadir un título (ej: "Mi PC") y pegar la clave en el apartado Clave.
+8. Click en "Agregar clave SSH".
+
+
+#### Pasos
+1. Crearse un nuevo repositorio en el apartado de "Repositorio" en GitHub
+2. Colocar el nombre de la carpeta local de preferencia o si es uno vacío cualquier nombre.
+3. *Configuración:*
+   - `Choose Visibility:` Con *public* lo ve cualquier persona y con *private* solo lo ves tú y las personas que invites.
+   - `Add README:` *On* para crear automáticamente un archivo README.md con información sobre el proyecto (descripción, cómo usarlo, etc.) y *Off* para no crearlo y tener el repositorio vacío inicialmente.
+   - `Add gitignore:` Selecciona una plantilla para ignorar archivos temporalmente o de configuración que no queramos subir al repositorio. 
+   - `Add license:` Elige una licencia (como MIT, GPL, Apache) para definir qué permisos tienen otros usuarios para usar, modificar o distribuir nuestro código. 
+4. Seguidamente, GitHub nos da comandos de que es lo que debemos hacer para contectar nuestro repositorio existente desde la terminal:
+   ```bash
+   git remote add origin git@github.com:Username/Repositorio.git
+   ```
+   (Enlaza nuestra carpeta local con el repositorio remoto de GitHub usando la clave SSH)
+   ```bash
+   git branch -M main
+   ```
+   (Renombra la rama actual a "main" - estándar de GitHub)
+   ```bash
+   git push -u origin main
+   ```
+   (Sube nuestro código local a GitHub por primera vez y guarda la conexión para futuros *push* simples.)
+
+### Clonar un repositorio
+Para clonar un repositorio usamos el comando:
+```bash
+git clone "git@github.com:Username/Repositorio.git"
+```
+
+Si por accidente lo hiciste con *HTTPS*:
+```bash
+git clone "https://github.com/Username/Repositorio.git"
+```
+
+Usamos el siguiente comando para cambiar el puntero de github y no te pida autenticación cada vez:
+```bash
+git remote set-url origin "git@github.com:Username/Repositorio.git"
+```
+(Este comando tamibén se usa si queremos cambiar el repositorio remoto al cual esta conectado el repositorio)
+
+Si queremos ver a que repositorio remoto esta conectado nuestro repo usamos el siguiente comando:
+```bash
+git remote -v
+```
+
+### Cambios en un repositorio
+Para subir cualquier cambio a nuestro repositorio usamos el siguiente comando:
+```bash
+git push origin <rama>
+```
+#### Comandos
++ `git push:` "Empujar" nuestros commits.
++ `origin:` ¿A dónde? Al servidor que apodamos "origin" (GitHub).
++ `<rama>`: ¿Qué rama? La rama `<rama>` de mi código.
+
+### Bajar los cambios de un repositorio
+Para bajar o traer los cambios hechos en un repositorio se utiliza el siguiente comando:
+```bash
+git pull origin <rama>
+```
+#### Comandos
++ `git pull:` "Traer" los commits del servidor.
++ `origin:` ¿De dónde? Del servidor que apodamos "origin" (GitHub).
++ `<rama>:` ¿Qué rama? La rama `<rama>` de mi código
