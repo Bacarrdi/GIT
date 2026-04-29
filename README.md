@@ -568,3 +568,56 @@ Así creamos una nueva rama a partir de ese commit y evitamos que el trabajo se 
 - Si vamos a trabajar varias líneas o hacer cambios importantes, es mejor crear una rama de una vez.
 - No conviene pasar mucho tiempo trabajando en estado `Detached HEAD`.
 - Hacer checkout a commits de proyectos grandes sirve bastante para aprender cómo fue creciendo el proyecto.
+
+## RAMAS Y GITFLOW BÁSICO (Clase 5 - 27 de abril, 2026)
+### ¿Qué son las ramas?
+
+Las ramas son una de las herramientas más importantes de Git para llevar un mejor control del código.  
+Una rama es una bifurcación del estado actual del proyecto, que crea un camino nuevo para seguir desarrollando en paralelo sin afectar directamente a otras ramas.
+
+### Git Branch
+
+`git branch` es el comando que nos permite gestionar las ramas que tiene o tendrá nuestro proyecto.
+
+#### Comandos básicos de `git branch`
+
+```bash
+git branch
+```
+Lista las ramas disponibles y muestra en cuál está posicionado actualmente el `HEAD`.
+
+```bash
+git branch <rama>
+```
+Crea una nueva rama a partir de la rama en la que estamos posicionados.
+
+```bash
+git branch -D <rama>
+```
+Elimina una rama.
+
+### Git Checkout enfocado en ramas
+
+Aunque antes usamos `git checkout` para movernos a commits antiguos, también se puede usar con ramas.
+
+```bash
+git checkout <rama>
+```
+Cambia de una rama a otra. Para hacerlo sin problemas, no deberíamos tener archivos en estado `modified`, `untracked` o `staged`.
+
+```bash
+git checkout -b <rama>
+```
+Crea una nueva rama y además nos mueve a ella directamente.
+
+### Git Checkout vs Git Switch
+
+Originalmente, `git checkout` era un comando sobrecargado porque servía para varias cosas: cambiar ramas, ir a commits antiguos y restaurar archivos.  
+En 2019, desde Git 2.23, se introdujo `git switch` para separar mejor el manejo de ramas y hacer el flujo más seguro e intuitivo.
+
+#### Diferencia principal
+
+- **`git checkout`** es multipropósito: sirve para ramas, commits y archivos.
+- **`git switch`** está especializado únicamente en ramas y evita errores accidentales al moverte.
+
+En resumen, `git checkout` es el comando clásico y universal, mientras que `git switch` es una alternativa más moderna para trabajar específicamente con ramas.
