@@ -686,3 +686,29 @@ Ejemplos de nombres:
 - **`feature/*`** nace de `develop`, muere en `develop` y sirve para desarrollar una tarea específica.
 - **`release/*`** nace de `develop`, muere en `main` y `develop`, y sirve para preparar la versión final.
 - **`hotfix/*`** nace de `main`, muere en `main` y `develop`, y sirve para corregir errores urgentes en producción.
+
+## GIT MERGE, FETCH, PULL Y PUSH (Clase 6 - 28 de abril, 2026)
+### ¿Qué es `git merge`?
+
+La palabra *merge* significa “fusión”.  
+Por eso, `git merge` es el comando que nos permite unir dos ramas en una sola, incorporando en una rama los commits que fueron realizados en otra.
+
+En otras palabras, sirve para combinar el trabajo hecho en distintas ramas y mantenerlo dentro de una misma línea de desarrollo.
+
+```bash
+git merge <rama>
+```
+
+Este comando fusiona la rama indicada con la rama en la que estamos posicionados actualmente.
+
+#### Uso de `--no-ff`
+
+Existe el flag `--no-ff`, que significa **no fast forward**.  
+Su función es evitar que Git haga una fusión rápida donde parezca que la rama nunca existió como tal.
+
+```bash
+git merge --no-ff <rama>
+```
+
+Al usar este flag, Git conserva mejor el historial de ramas y además fuerza la creación de un commit de merge.  
+Esto ayuda a que se vea con más claridad cuándo una rama fue integrada al proyecto, incluso si después esa rama se elimina.
