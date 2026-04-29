@@ -621,3 +621,68 @@ En 2019, desde Git 2.23, se introdujo `git switch` para separar mejor el manejo 
 - **`git switch`** está especializado únicamente en ramas y evita errores accidentales al moverte.
 
 En resumen, `git checkout` es el comando clásico y universal, mientras que `git switch` es una alternativa más moderna para trabajar específicamente con ramas.
+
+### Gitflow básico
+
+Gitflow es un flujo de trabajo que nos permite organizar mejor las ramas del proyecto.  
+A través de reglas y convenciones, ayuda a que el trabajo en equipo sea más ordenado, entendible y fácil de mantener. Es especialmente útil en proyectos donde varias personas trabajan al mismo tiempo.
+
+Sin Gitflow, las ramas pueden volverse desordenadas y difíciles de entender.  
+Con Gitflow, el trabajo se organiza mejor y la estructura de ramas se vuelve mucho más clara visualmente.
+
+### ¿Cómo funciona Gitflow?
+#### Rama `main`
+Es la rama principal que normalmente existe por defecto al crear un repositorio.  
+Su propósito es contener el código que ya está en producción.
+
+#### Rama `develop`
+Es la rama de preproducción.  
+Aquí se integran las características que todavía están en prueba o validación, pero que más adelante se lanzarán a producción.  
+Es la rama en la que normalmente más se trabaja durante el proyecto.
+
+#### Ramas de apoyo
+Son ramas auxiliares que se usan para escribir código de forma más ordenada.  
+Las principales son:
+
+- `feature`
+- `release`
+- `hotfix`
+
+### Ramas de apoyo en Gitflow
+#### `feature/*`
+Se usan cuando trabajamos en una nueva característica para el proyecto.  
+Estas ramas nacen desde `develop`, y cuando la funcionalidad está terminada, vuelven a fusionarse en `develop` y luego se eliminan.
+
+Ejemplos de nombres:
+- `feature/sum-function`
+- `feature/add-search-bar`
+- `feature/new-form-user`
+
+#### `release/*`
+Se usan cuando se está preparando una nueva versión del proyecto.  
+En teoría, aquí se hacen pruebas y ajustes finales antes del lanzamiento.  
+Nacen desde `develop` y luego se fusionan en `main` o también de vuelta en `develop`.
+
+Ejemplos de nombres:
+
+- `release/v1.0.0`
+- `release/v2.1.0-beta`
+
+#### `hotfix/*`
+Se usan para arreglar problemas imprevistos en producción, como errores críticos o fallos urgentes.  
+Por eso nacen desde `main`, ya que `develop` puede tener cambios inestables todavía.  
+Después se fusionan en `main` y también en `develop`.
+
+Ejemplos de nombres:
+- `hotfix/login-authentication-error`
+- `hotfix/fix-database-connection-leak`
+- `hotfix/security-patch-v1.0.2`
+- `hotfix/api-timeout-emergency`
+- `hotfix/mobile-responsive-crash`
+- `hotfix/broken-payment-gateway`
+
+### Resumen de Gitflow
+- **`develop`** nace de `main`, no se elimina y representa el trabajo diario del equipo.
+- **`feature/*`** nace de `develop`, muere en `develop` y sirve para desarrollar una tarea específica.
+- **`release/*`** nace de `develop`, muere en `main` y `develop`, y sirve para preparar la versión final.
+- **`hotfix/*`** nace de `main`, muere en `main` y `develop`, y sirve para corregir errores urgentes en producción.
