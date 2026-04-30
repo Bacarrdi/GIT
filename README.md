@@ -712,3 +712,43 @@ git merge --no-ff <rama>
 
 Al usar este flag, Git conserva mejor el historial de ramas y además fuerza la creación de un commit de merge.  
 Esto ayuda a que se vea con más claridad cuándo una rama fue integrada al proyecto, incluso si después esa rama se elimina.
+
+### ¿Qué es `git fetch`?
+
+`git fetch` es el comando que permite revisar si existen cambios nuevos en el repositorio remoto, sin mezclarlos todavía con tu rama local.
+
+```bash
+git fetch
+```
+
+Este comando actualiza la información de las ramas remotas y te permite ver si hubo cambios, pero no modifica tu trabajo actual directamente.  
+Es útil para comprobar si otra persona subió cambios antes de hacer un `pull` o un `merge`.
+
+### ¿Qué es `git pull`?
+`git pull` es el comando que trae los cambios del repositorio remoto a tu rama local.
+
+```bash
+git pull origin <rama>
+```
+
+Se recomienda usarlo junto con `origin` y el nombre de la rama para indicar exactamente de dónde quieres traer los cambios.  
+Así se evitan confusiones cuando trabajamos con varias ramas o con repositorios compartidos.
+
+### ¿Qué es `git push`?
+`git push` es el comando que sube tus commits desde tu repositorio local hacia el repositorio remoto.
+
+```bash
+git push origin <rama>
+```
+
+También es recomendable usarlo junto con `origin` y el nombre de la rama, para dejar claro a qué rama remota quieres enviar tus cambios.
+
+#### Uso de `-u`
+Si no es tu repositorio, o es la primera vez que subes esa rama al remoto, conviene usar el flag `-u`.
+
+```bash
+git push -u origin <rama>
+```
+
+Este flag establece una relación de seguimiento entre tu rama local y la rama remota.  
+De esa forma, después podrás usar simplemente `git push` o `git pull` sin tener que escribir todo de nuevo.
