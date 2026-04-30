@@ -752,3 +752,80 @@ git push -u origin <rama>
 
 Este flag establece una relación de seguimiento entre tu rama local y la rama remota.  
 De esa forma, después podrás usar simplemente `git push` o `git pull` sin tener que escribir todo de nuevo.
+
+### Flujo de trabajo básico (sin Pull Requests)
+
+Un flujo de trabajo básico en equipo, sin usar Pull Requests, puede seguir estos pasos:
+
+#### 1. Actualizar la rama `develop`
+```bash
+git checkout develop
+git fetch
+git pull origin develop
+```
+
+Primero nos movemos a la rama `develop`, revisamos si hay cambios en el remoto y luego los traemos a nuestra copia local.
+
+#### 2. Volver a nuestra rama de trabajo
+```bash
+git checkout <rama>
+git merge develop
+```
+
+Después regresamos a nuestra rama de trabajo y fusionamos `develop`, pero solo si hubo cambios nuevos.  
+Así trabajamos con una rama lo más actualizada posible.
+
+#### 3. Trabajar y subir cambios
+```bash
+git push origin <rama>
+```
+
+Aquí subimos nuestros avances al repositorio remoto.  
+Si es la primera vez que subimos esa rama, entonces usamos:
+
+```bash
+git push -u origin <rama>
+```
+
+#### 4. Integrar nuestra rama en `develop`
+```bash
+git checkout develop
+git fetch
+git pull origin develop
+git merge --no-ff <rama>
+```
+
+Luego volvemos a `develop`, la actualizamos y fusionamos nuestra rama usando `--no-ff` para conservar mejor el historial.
+
+#### 5. Resolver conflictos si aparecen
+Si durante el merge aparecen conflictos, debemos resolverlos manualmente en los archivos afectados.  
+Una vez resueltos, hacemos:
+
+```bash
+git add .
+git commit
+```
+
+Con esto confirmamos la resolución del conflicto y finalizamos el merge.
+
+#### 6. Eliminar la rama si ya no se necesita
+```bash
+git branch -D <rama>
+```
+
+Cuando la rama ya fue fusionada y no se va a seguir usando, se puede eliminar localmente.
+
+#### 7. Subir la rama principal actualizada
+```bash
+git push origin develop
+```
+
+Finalmente, subimos la rama `develop` ya actualizada con los cambios fusionados.
+
+### Resumen
+- `git merge` une ramas.
+- `git fetch` revisa cambios remotos sin aplicarlos.
+- `git pull` trae cambios del remoto a tu rama local.
+- `git push` sube tus cambios al remoto.
+- `git push -u origin <rama>` se usa la primera vez para enlazar la rama local con la remota.
+- `git merge --no-ff <rama>` ayuda a conservar mejor el historial de integración de ramas.
