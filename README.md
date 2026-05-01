@@ -829,3 +829,52 @@ Finalmente, subimos la rama `develop` ya actualizada con los cambios fusionados.
 - `git push` sube tus cambios al remoto.
 - `git push -u origin <rama>` se usa la primera vez para enlazar la rama local con la remota.
 - `git merge --no-ff <rama>` ayuda a conservar mejor el historial de integración de ramas.
+
+### PULL REQUEST Y PROTECCIÓN DE REPOSITORIO (Clase 7 - 29 de abril, 2026)
+### ¿Qué son los Pull Requests?
+Los **Pull Requests**, también conocidos como **PRs**, son una forma más profesional y ordenada de trabajar con Git y GitHub.
+
+Un Pull Request es una solicitud que se crea en GitHub para proponer que los cambios realizados en una rama sean fusionados con otra rama del proyecto, normalmente `develop` o `main`.
+
+Su principal ventaja es que permite que otras personas del equipo revisen los cambios antes de integrarlos al código base.  
+De esta manera, no se hace el merge directamente, sino que primero existe una etapa de revisión, comentarios y aprobación.
+
+### ¿Por qué usar Pull Requests?
+Trabajar sin Pull Requests puede ser más rápido, pero también más riesgoso.  
+Si cualquier colaborador puede hacer `push` y `merge` directamente, se pierde control sobre lo que entra al proyecto.
+
+Los PRs ayudan a:
+
+- revisar los cambios antes del merge
+- entender qué se modificó y por qué
+- debatir o comentar propuestas
+- aprobar o rechazar cambios
+- mejorar la organización del trabajo en equipo
+- reducir errores o integraciones no revisadas
+
+En resumen, los Pull Requests hacen que el trabajo grupal sea más seguro, más claro y más controlado.
+
+### ¿Cómo crear un Pull Request?
+Primero debemos subir nuestra rama al remoto:
+
+```bash
+git push origin <rama>
+```
+
+Si es la primera vez que subimos esa rama:
+
+```bash
+git push -u origin <rama>
+```
+
+Después, en GitHub, se sigue este flujo:
+
+1. Entrar al repositorio en GitHub.
+2. Buscar el aviso o banner que indica que tu rama tuvo cambios recientes.
+3. Hacer clic en **Compare & pull request**.
+4. Verificar que en `base` esté la rama destino, normalmente `develop` o `main`.
+5. Verificar que en `compare` esté tu rama con los cambios.
+6. Escribir un título claro y una descripción breve de lo que hiciste.
+7. Hacer clic en **Create pull request**.
+
+A partir de ahí, el equipo puede revisar los cambios, dejar comentarios, pedir correcciones o aprobar el merge.
