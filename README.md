@@ -951,3 +951,80 @@ Usar Pull Requests es importante, pero no suficiente si el repositorio sigue per
 
 Para proteger ramas importantes como `main` o `develop`, GitHub permite crear reglas de protección.
 
+#### Pasos básicos para proteger una rama
+1. Entrar al repositorio en GitHub.
+2. Ir a **Settings**.
+3. Entrar a la sección **Branches**.
+4. En **Branch protection rules**, hacer clic en **Add rule**.
+5. En `Branch name pattern`, escribir el nombre de la rama que se quiere proteger, por ejemplo `main` o `develop`.
+6. Activar la opción **Require a pull request before merging**.
+7. Activar **Require approvals** y elegir cuántas aprobaciones se necesitan.
+8. Opcionalmente, activar la opción para invalidar aprobaciones antiguas si se suben nuevos commits.
+9. Guardar los cambios.
+
+Con esto, nadie podrá fusionar directamente a esa rama sin pasar primero por un Pull Request revisado y aprobado.
+
+### ¿Cómo colaborar en un proyecto si no soy colaborador invitado?
+También es posible contribuir a un proyecto público aunque no seas colaborador invitado.  
+La forma más común es usando el modelo **Fork + Pull Request**.
+
+Un **fork** es una copia completa del repositorio original dentro de tu propia cuenta de GitHub.  
+Desde esa copia puedes trabajar libremente y luego proponer tus cambios al repositorio original mediante un Pull Request.
+
+### Flujo básico usando fork
+#### 1. Hacer fork del repositorio original
+Desde la página del repositorio original en GitHub, se hace clic en **Fork**.  
+GitHub crea una copia del proyecto en tu cuenta.
+
+#### 2. Clonar tu fork y agregar el remoto `upstream`
+```bash
+git clone https://github.com/tu-usuario/nombre-repo.git
+cd nombre-repo
+git remote add upstream https://github.com/owner-original/nombre-repo.git
+```
+
+Aquí:
+- `origin` será tu fork
+- `upstream` será el repositorio original
+
+#### 3. Crear una rama, trabajar y subir cambios a tu fork
+```bash
+git checkout -b <rama>
+git push -u origin <rama>
+```
+
+Los cambios se suben a tu fork, no al repositorio original.
+
+#### 4. Abrir el Pull Request hacia el repositorio original
+Después de subir tu rama:
+
+1. Entrar a tu fork en GitHub.
+2. Hacer clic en **Compare & pull request**.
+3. Verificar que `base repository` sea el repositorio original.
+4. Verificar que `head repository` sea tu fork.
+5. Escribir el título y la descripción.
+6. Crear el Pull Request.
+
+El dueño o equipo del repositorio original podrá revisar esos cambios y decidir si los acepta.
+
+#### 5. Mantener el fork actualizado mientras la PR sigue abierta
+```bash
+git fetch upstream
+git rebase upstream/main
+```
+
+Si aparecen conflictos durante el rebase:
+
+```bash
+git add <archivo>
+git rebase --continue
+```
+
+Y luego:
+
+```bash
+git push --force-with-lease
+```
+
+Esto actualiza tu rama en el fork y los nuevos commits aparecen automáticamente en el Pull Request abierto.
+
