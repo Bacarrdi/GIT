@@ -878,3 +878,76 @@ Después, en GitHub, se sigue este flujo:
 7. Hacer clic en **Create pull request**.
 
 A partir de ahí, el equipo puede revisar los cambios, dejar comentarios, pedir correcciones o aprobar el merge.
+
+### Flujo de trabajo con Pull Requests
+#### 1. Actualizar la rama `develop`
+```bash
+git checkout develop
+git fetch
+git pull origin develop
+```
+
+Primero actualizamos la rama `develop` para trabajar con la versión más reciente del proyecto.
+
+#### 2. Ir a nuestra rama de trabajo
+```bash
+git checkout <rama>
+```
+
+Si la rama todavía no existe, podemos crearla y movernos a ella directamente:
+
+```bash
+git checkout -b <rama>
+```
+
+#### 3. Fusionar `develop` en nuestra rama si hubo cambios
+```bash
+git merge develop
+```
+
+Esto se hace para que nuestra rama tenga también los cambios más recientes de `develop`.
+
+#### 4. Trabajar en la rama y subir cambios
+```bash
+git push origin <rama>
+```
+
+Si es la primera vez que se sube:
+
+```bash
+git push -u origin <rama>
+```
+
+#### 5. Antes de abrir la PR, sincronizar otra vez con `develop`
+```bash
+git checkout develop
+git fetch
+git checkout <rama>
+git merge develop
+```
+
+Esto sirve para evitar que la PR se abra con una rama desactualizada.
+
+#### 6. Resolver conflictos si aparecen
+Si durante el merge aparecen conflictos, debemos resolverlos manualmente.  
+Después de corregirlos:
+
+```bash
+git add .
+git commit
+```
+
+Y luego volvemos a subir la rama:
+
+```bash
+git push origin <rama>
+```
+
+#### 7. Abrir el Pull Request
+Cuando la rama ya está actualizada y subida correctamente, recién se crea el Pull Request en GitHub.
+
+### ¿Cómo proteger el repositorio y limitar la colaboración?
+Usar Pull Requests es importante, pero no suficiente si el repositorio sigue permitiendo merges directos sin control.
+
+Para proteger ramas importantes como `main` o `develop`, GitHub permite crear reglas de protección.
+
