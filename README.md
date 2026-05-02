@@ -1,6 +1,8 @@
 # Trabajo Individual
 
-![foto de perfil](images/perfil.jpg)
+<p align="center">
+  <img src="images/git&github.png" alt="git and github images" width="300">
+</p>
 
 *Josue Joel Lizarazu Fernández*
 
