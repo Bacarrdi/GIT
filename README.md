@@ -1097,3 +1097,41 @@ Muestra únicamente el contenido stageado de un archivo específico.
 git diff <rama1> <rama2>
 ```
 Compara dos ramas entre sí para ver sus diferencias.
+
+### Git Rebase
+
+`git rebase` es otra forma de integrar cambios entre ramas.  
+A diferencia de `git merge`, no crea un commit de fusión, sino que reescribe la historia para que parezca que los cambios ocurrieron en una sola línea continua.
+
+```bash
+git rebase main
+```
+
+Este comando pone tus cambios por encima de lo último que existe en `main`.
+
+La ventaja es que el historial queda más limpio y lineal.  
+Sin embargo, también puede ser peligroso si se usa en ramas compartidas, porque reescribe commits que otras personas podrían estar usando.
+
+### Limpieza del repositorio
+#### Git Clean
+```bash
+git clean -f
+```
+Borra archivos que no están siendo rastreados por Git.
+
+Este comando debe usarse con mucho cuidado, porque esos archivos eliminados no pasan por el historial y normalmente no se pueden recuperar fácilmente.
+
+#### Buena práctica: borrar ramas después del merge
+Una vez que una rama ya fue fusionada a `main` o `develop`, es recomendable eliminarla para mantener el repositorio más limpio y ordenado.
+
+```bash
+git branch -d feature/mi-rama
+```
+Borra la rama local.
+
+```bash
+git push origin --delete feature/mi-rama
+```
+Borra la rama remota.
+
+En GitHub también se puede activar la opción para eliminar automáticamente la rama después de cada merge.
