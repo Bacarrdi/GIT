@@ -830,7 +830,7 @@ Finalmente, subimos la rama `develop` ya actualizada con los cambios fusionados.
 - `git push -u origin <rama>` se usa la primera vez para enlazar la rama local con la remota.
 - `git merge --no-ff <rama>` ayuda a conservar mejor el historial de integración de ramas.
 
-### PULL REQUEST Y PROTECCIÓN DE REPOSITORIO (Clase 7 - 29 de abril, 2026)
+## PULL REQUEST Y PROTECCIÓN DE REPOSITORIO (Clase 7 - 29 de abril, 2026)
 ### ¿Qué son los Pull Requests?
 Los **Pull Requests**, también conocidos como **PRs**, son una forma más profesional y ordenada de trabajar con Git y GitHub.
 
@@ -1028,3 +1028,72 @@ git push --force-with-lease
 
 Esto actualiza tu rama en el fork y los nuevos commits aparecen automáticamente en el Pull Request abierto.
 
+## COMANDOS AVANZADOS Y LIMPIEZA (Clase 8 - 30 de abril, 2026)
+### Git Stash
+`git stash` sirve para guardar cambios de manera temporal sin necesidad de hacer un commit.  
+Es útil cuando estás trabajando en una rama, pero necesitas cambiar rápidamente de contexto, por ejemplo porque debes moverte a otra rama o actualizar cambios del proyecto.
+
+```bash
+git stash
+```
+Guarda los cambios actuales en una especie de almacenamiento temporal y deja limpio el `working directory`.
+
+```bash
+git stash -m "mensaje"
+```
+Permite guardar el stash con un mensaje descriptivo para identificarlo más fácilmente.
+
+```bash
+git stash list
+```
+Muestra la lista de stashes guardados.
+
+```bash
+git stash pop
+```
+Recupera el último stash guardado y además lo elimina de la lista.
+
+#### ¿Cuándo usar `git stash`?
+Una situación común es cuando otro Pull Request ya fue aprobado y modificó archivos que tú también estabas editando.  
+En ese caso, puedes:
+
+1. Guardar tus cambios con `git stash`
+2. Actualizar tu rama con los cambios más recientes
+3. Recuperar tu trabajo con `git stash pop`
+4. Resolver conflictos si aparecen
+
+De esta forma evitas perder cambios y mantienes tu trabajo temporalmente seguro.
+
+### Git Diff
+`git diff` se usa para ver diferencias entre archivos, ramas o estados del proyecto.  
+Es muy útil para revisar exactamente qué cambió antes de hacer un commit.
+
+```bash
+git diff
+```
+Muestra todos los cambios que todavía no están en el área de staging.
+
+```bash
+git diff .
+```
+Muestra los cambios sin stagear de la carpeta actual.
+
+```bash
+git diff <archivo>
+```
+Muestra los cambios hechos en un archivo específico.
+
+```bash
+git diff --staged .
+```
+Muestra lo que ya está en el staging area y está listo para commit.
+
+```bash
+git diff --staged <archivo>
+```
+Muestra únicamente el contenido stageado de un archivo específico.
+
+```bash
+git diff <rama1> <rama2>
+```
+Compara dos ramas entre sí para ver sus diferencias.
