@@ -1135,3 +1135,26 @@ git push origin --delete feature/mi-rama
 Borra la rama remota.
 
 En GitHub también se puede activar la opción para eliminar automáticamente la rama después de cada merge.
+
+### Git Tags
+Los tags sirven para marcar commits importantes, por ejemplo una versión final, una entrega o un lanzamiento.
+
+```bash
+git tag -a v1.0 -m "Version final"
+```
+Este comando crea una etiqueta anotada llamada `v1.0` con un mensaje descriptivo.
+
+Los tags ayudan a identificar puntos importantes en la historia del proyecto sin necesidad de buscar commit por commit.
+
+### Git Commit Amend
+```bash
+git commit --amend
+```
+Este comando permite modificar el último commit.
+
+Se usa sobre todo cuando:
+- escribiste mal el mensaje del último commit
+- olvidaste agregar un archivo al último commit
+- quieres corregir ese commit antes de compartirlo
+
+Es útil, pero debe manejarse con cuidado si el commit ya fue subido al remoto, porque cambia el historial reciente.
